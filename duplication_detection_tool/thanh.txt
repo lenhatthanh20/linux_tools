@@ -1,0 +1,3 @@
+Duplication Words Detection tool
+
+This is a small tool which built in linux  invironment. And it is written by C language.
