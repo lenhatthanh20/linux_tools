@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Learn JavaScript</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/dataTables.jqueryui.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.jqueryui.min.css">
+
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/fixedcolumns/3.2.4/js/dataTables.fixedColumns.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/select/1.2.5/js/dataTables.select.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.2.5/css/select.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedcolumns/3.2.4/css/fixedColumns.dataTables.min.css">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+	<style type="text/css">
+		.displayMine {
+			border: 2px solid #fff !important;
+    		padding: 10px;
+    		background-color: #fff;
+		}
+		.jconfirm .jconfirm-scrollpane {
+			width: 100%;
+    		height: 100%;
+    		margin: auto;
+    		max-width: 400px !important;
+		}
+		#scan,#confirm {
+			background-color: #2ecc71;
+			padding: 10px 15px; 
+			color: #fff;
+			font-size: 15px;
+			border: 0px;
+			border-radius: 3px;
+			float: left;
+			margin-bottom: 10px;
+		}
+		#scan:hover, #confirm:hover, #unselect:hover {
+			background-color: #158a46;
+			box-shadow: 5px 5px 5px #666;
+	  		-moz-box-shadow: 5px 5px 5px #666;
+  			-webkit-box-shadow: 5px 5px 5px #666;
+  			cursor: pointer;
+		}
+
+			/*= input focus effects css
+			=========================== */
+			:focus{outline: none;}
+
+			.col-3{float: left; width: 74%; margin: 40px 3%; position: relative;} /* necessary to give position: relative to parent. */
+			input[type="text"]{
+				font: 15px/17px "Lato", Arial, sans-serif; 
+				color: #333; width: 100%; 
+				box-sizing: border-box; 
+				letter-spacing: 1px;
+				border-radius: 3px;
+			}
+
+
+			.effect-9{border: 1px solid #ccc; padding: 7px 14px 9px; transition: 0.4s;}
+
+			.effect-9 ~ .focus-border:before,
+			.effect-9 ~ .focus-border:after{content: ""; position: absolute; top: 0; right: 0; width: 0; height: 2px; background-color: #2ecc71; transition: 0.2s; transition-delay: 0.2s;}
+			.effect-9 ~ .focus-border:after{top: auto; bottom: 0; right: auto; left: 0; transition-delay: 0.6s;}
+			.effect-9 ~ .focus-border i:before,
+			.effect-9 ~ .focus-border i:after{content: ""; position: absolute; top: 0; left: 0; width: 2px; height: 0; background-color: #2ecc71; transition: 0.2s;}
+			.effect-9 ~ .focus-border i:after{left: auto; right: 0; top: auto; bottom: 0; transition-delay: 0.4s;}
+			.effect-9:focus ~ .focus-border:before,
+			.effect-9:focus ~ .focus-border:after{width: 100%; transition: 0.2s; transition-delay: 0.6s;}
+			.effect-9:focus ~ .focus-border:after{transition-delay: 0.2s;}
+			.effect-9:focus ~ .focus-border i:before,
+			.effect-9:focus ~ .focus-border i:after{height: 100%; transition: 0.2s;}
+			.effect-9:focus ~ .focus-border i:after{transition-delay: 0.4s;}
+
+			/*= input focus effects css End
+			=============================== */
+			.col-4{
+				float: right; 
+				width: 20%; 
+				margin-top: 40px; 
+				position: relative;
+			}	
+			.displayMine {
+				margin:auto;
+			}
+			.messageinfo {
+				border-bottom: 15px;
+				height: 170px;
+				width: 100%;
+			}
+			#loading {
+				float: right;
+				font-size: 18px;
+			    color: #fff;
+			    line-height: 10px;
+			}
+			.checkinfo {
+				width: 100%;
+				height: 100px;
+				margin-top: 0px;
+			}
+			.tutorial {
+				width: 100%;
+				max-width: 500px;
+				height: 100px;
+				float: right;
+				border-radius: 3px;
+				margin-top: 20px;
+				
+				background-color: #fff; 
+			}
+			.checkinfo-accesstoken {
+				width: 100%;
+				max-width: 300px;
+				height: 100px;
+				background-color: #fff; 
+				margin-top: 20px;
+				border-radius: 3px;
+				float: left;
+				
+			}
+			.yourinfor{
+				text-align: center;
+				color: #fff;
+				background-color: #3C5A98;  
+				margin-top: 0px;
+				border-radius: 3px;
+				padding:5px; 
+
+			}
+			.yourname, .yourid {
+				padding-left: 5px; 
+				font-size: 16px;
+				line-height: 11px;
+
+			}
+			.tutorial-id, .listunfriends-id {
+				padding-left: 5px; 
+				font-size: 13.5px;
+				line-height: 16px;
+			}
+			.coderdocs {
+				width: 100%;
+				height: 50px;
+				background-color: #3C5A98;
+				margin-bottom: 20px;
+			}
+			.coderdocsinfo {
+				text-align: center;
+				color: #fff;
+				padding-top: 12.5px;
+				font-size: 23px; 
+			}
+			.unfriendlist {
+				width: 100%;
+				height: 130px;
+				border-radius: 3px;
+				margin-top: 20px;
+				margin-right: 200px;
+				margin-bottom: 20px;
+				background-color: #fff; 
+			}
+			#unselect {
+			background-color: #2ecc71;
+			padding: 10px 15px; 
+			color: #fff;
+			font-size: 15px;
+			border: 0px;
+			border-radius: 3px;
+			float: left;
+			margin-bottom: 10px;
+			margin-left: 50px;
+			}
+	</style>
+</head>
+<body style="width:100%; max-width: 1280px; margin:auto; font-family: Neue Helvetica, Arial, sans-serif !important;">
+
+	<div id="table" class="displayMine" style="width:65%; max-width: 1280px !important; margin:auto; background-color: #33383a;">
+			<div class="coderdocs">
+				<p class="coderdocsinfo"><b>CoderDocs</b> - Facebook Friends List tools</p>
+			</div>
+
+			<div class="checkinfo">
+				<div class="checkinfo-accesstoken">
+					<p class="yourinfor"><b>Your information</b></p>
+					<p class="yourname">Your name: </p>
+					<p class="yourid">Your ID: </p>
+				</div>
+				<div class="tutorial">
+					<p class="yourinfor"><b>Tutorial</b></p>
+					<p class="tutorial-id">Enter your access token in below and click "<font color="red">Start Scanning</font>".
+					After that, you can choose a list of friends who wanted to remove. Click "<font color="red">Good bye my friends</font>". Do <font color="red">not share</font> access token for anyone.</p>
+				</div>
+			</div>
+			
+				
+		
+		
+			<div class="col-3">
+	        	<input id="token" class="effect-9" type="text" placeholder="Your Access Token">
+	            <span class="focus-border">
+	            	<i></i>
+	            </span>
+	        </div>
+	        <div class="col-4">
+	        	<button type="button" class="btn btn-info" id="scan"><b>Start Scanning</b></button>
+	        </div>  
+		
+
+		<div class="messageinfo">
+			<button type="button" class="btn btn-info" id="confirm"><b>Good bye my friends</b></button>
+			<button type="button" class="btn btn-info" id="unselect"><b>Unselect All</b></button>
+			<p id="loading"></p>
+		</div>
+		<div class="unfriendlist">
+				<p class="yourinfor"><b>When you click "<font color="#2ECC71">Good bye my friends</font>" button. All people in below will be removed.</b></p>
+				<p class="listunfriends-id">[empty]</p>
+		</div>
+
+	<table id="example" class="display" style="width:100%; max-width: 1280px !important; margin:auto; text-align: center;">
+
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>User ID</th>
+                <th>Reactions</th>
+                <th>Comments</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>User ID</th>
+                <th>Reactions</th>
+                <th>Comments</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+	<script type="text/javascript">
+
+
+
+    	var t = $('#example').DataTable();
+
+
+    	var dataRemove = [];
+    	var nameRemove = [];
+    	/*-----------------------------*/
+    	//select emements in table
+    	$('#example tbody').on( 'click', 'tr', function () {
+        	$(this).toggleClass('selected');
+        	var data = t.row( this ).data();
+
+        	//console.log(t.row( this ).index());
+        	//console.log(t.row( this, { selected: true } ).any() );
+        	//console.log(data[1]);
+
+        	if (dataRemove.indexOf(data[1]) === -1) {
+	        	dataRemove.push(data[1]);
+	        	nameRemove.push(data[0]);
+	        	$('.listunfriends-id').text(nameRemove);
+	        	console.log(dataRemove[0]);
+	        	console.log(dataRemove[1]);
+	        	console.log(dataRemove[2]);
+	        	console.log(dataRemove[3]);
+        	} else {
+        		dataRemove.splice(dataRemove.indexOf(data[1]), 1);
+        		nameRemove.splice(nameRemove.indexOf(data[0]), 1);
+        		$('.listunfriends-id').text(nameRemove);
+        		console.log(dataRemove[0]);
+	        	console.log(dataRemove[1]);
+	        	console.log(dataRemove[2]);
+	        	console.log(dataRemove[3]);
+        	}
+        	if(dataRemove.length === 0){
+        		$('.listunfriends-id').text("[empty]");
+        	}
+   		} );
+ //---------------------------------------------------------------------------------------------------
+ $("#unselect").on('click', function (){ 
+ 	console.log("Le Nhat Thanh");
+ 	//$("tr.selected").removeClass('selected');
+ 	t.rows( '.selected' ).nodes().to$().removeClass( 'selected' );
+ 	dataRemove = [];
+ 	nameRemove = [];
+ 	$('.listunfriends-id').text("[empty]");
+ });
+
+ //---------------------------------------------------------------------------------------------------
+ $("#confirm").on('click', function	(){
+ 	var token=$('#token').val();
+ 	if(dataRemove.length === 0){
+ 		$.alert('You have nobody to remove. Please click someone and try again!');
+ 	}else {
+	 	$.confirm({
+		    title: 'Warning!',
+		    content: 'Do you want to unfriend those people?',
+		    buttons: {
+		        confirm: function () {
+		            //console.log(dataRemove.length)
+		            //remove friends
+		            for(var i = 0; i < dataRemove.length; i++){
+			            var url='https://graph.facebook.com/me/friends?uid='+dataRemove[i]+'&method=delete';
+			            $.get(url,{access_token:token}).done(function(response){
+							
+						}).fail(function(response){
+							$.alert(JSON.parse(response.responseText).error.message+'\n');
+							break;
+						});
+						t.row('.selected').remove().draw( false );
+						
+					}
+					$.alert('Successfully confirmed!');
+					dataRemove = [];
+
+		        },
+		        cancel: function () {
+		            $.alert('Successfully cancel!');
+		        }
+		    }
+		});
+ 	}	
+ });
+//---------------------------------------------------------------------------------------------------
+
+		// Handle Facebook token
+		var token=$('#token').val()
+
+		var flag = 0;
+
+		var countComments = [];
+		var countReactions = [];
+		var nameFriends = [];
+		// click to scan token
+		$('#scan').click(function(){
+			var token=$('#token').val();
+			$('#scan').attr('disabled','disabled');
+
+			$.get('https://graph.facebook.com/v3.0/me/',
+					{access_token:token}).done(function(response){
+						$('.yourname').text("Your name: " +response.name);
+						$('.yourid').text("Your ID: " +response.id);
+					}).fail(function(response){
+						//do nothing
+			});
+
+			getFriends(token);
+		});
+
+
+		// main function
+		function getFriends(token){
+			$.get('https://graph.facebook.com/v3.0/me?fields=friends.limit(5000)',
+			{access_token:token}).done(function(response){	
+				$('#loading').text("Loading Database. Please wait...");
+				
+
+				var idFriends = new Array(response.friends.data.length);
+				console.log(response.friends.data.length);
+					//init array
+				for (var i = 0; i < response.friends.data.length; i++) {
+					countComments[i] = 0; // save amount of comment of every friend
+					countReactions[i] = 0; // save amount of Reaction of every friend
+					idFriends[i] = response.friends.data[i].id; // save ID of all friends
+					nameFriends[i] = response.friends.data[i].name; // save name of all friends
+				}
+
+						//------------------------------------------------------------------
+						//------------------------------------------------------------------
+						$.get('https://graph.facebook.com/v3.0/me/?fields=feed.limit(300){comments{from},reactions{id}}',
+							{access_token:token}).done(function(response){
+
+									countComment(response.feed, idFriends, countComments) // caculate count of comment
+									countLike(response.feed, idFriends, countReactions); // caculate count of like
+						});
+							
+						//------------------------------------------------------------------
+						//------------------------------------------------------------------	
+
+			}).fail(function(response){
+				$.alert(JSON.parse(response.responseText).error.message);
+				$('#scan').attr('disabled',false); // active scan button
+			});
+		}
+
+		function countLike(response, idFriends, countReac){
+			for (var j = 0; j < response.data.length; j++) {
+				if(response.data[j].reactions) { //if have comment in any post
+					countLikeInside(response.data[j].reactions, idFriends, countReac);
+				}
+			}
+			if(response.paging&&response){
+				if (response.paging.next) {
+					
+					$.getJSON(response.paging.next,function(response){
+						countLike(response, idFriends, countReac);
+					});
+				} 
+			} else {
+				console.log("flagReaction");
+				drawTable (idFriends, 1);
+			}
+		}
+
+		function countLikeInside (response, idFriends, countReac) {
+			for (var k = 0; k < response.data.length; k++) {
+				for (var i = 0; i < idFriends.length; i++) {
+					if ((idFriends[i] === response.data[k].id)) {
+						countReac[i]++;
+					}
+				}
+			}
+			if (response.paging&&response) {
+				if (response.paging.next) {
+					$.getJSON(response.paging.next,function(response){
+						countLikeInside(response, idFriends, countReac);
+					});
+				}
+			}
+		}
+
+		function countComment(response, idFriends, count){
+			for (var j = 0; j < response.data.length; j++) {
+				if(response.data[j].comments) { //if have comment in any post
+					countCommentInside(response.data[j].comments, idFriends, count);
+				}
+			}
+			if(response.paging&&response){
+				if (response.paging.next) {
+					//console.log(response.paging.next);
+					$.getJSON(response.paging.next,function(response){
+						countComment(response, idFriends, count);
+					});
+				} 
+			} else {
+				console.log("flagComment");
+				drawTable (idFriends, 1);
+			}
+		}
+
+		function countCommentInside(response, idFriends, count){
+			for (var k = 0; k < response.data.length; k++) {
+				if(response.data[k].from!==null) {
+					for (var i = 0; i < idFriends.length; i++) {
+						if ((idFriends[i] === response.data[k].from.id)) {
+							count[i]++;
+						}
+					}
+				}
+			}
+			if (response.paging&&response) {
+				if (response.paging.next) {
+					$.getJSON(response.paging.next,function(response){
+						countCommentInside(response, idFriends, count);
+					});
+				}
+			}
+		}
+
+		function drawTable (idFriends, flagTemp){
+			flag += flagTemp;
+			if (flag === 2) {
+				for (var i = 0; i < idFriends.length; i++) {
+					t.row.add([ nameFriends[i], idFriends[i], countReactions[i], countComments[i] ]).draw(false);
+				}
+				$('#loading').text("Successfully!");
+				$.alert("Get data successfully! Let's enjoy! ");
+			}
+		}
+
+
+		// JavaScript for label effects only
+		/*
+		$(window).load(function(){
+			$(".col-3 input").val("");
+			
+			$(".input-effect input").focusout(function(){
+				if($(this).val() != ""){
+					$(this).addClass("has-content");
+				}else{
+					$(this).removeClass("has-content");
+				}
+			})
+		});
+		*/
+	</script>
+</body>
+</html>
